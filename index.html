@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBSIDE Xll TKR 3 </title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: white;
+        }
+        body{
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background:linear-gradient(to right,  rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+             url('HALL.JPG') no-repeat center center fixed; /*overlay+gambar*/
+            background-size: cover; /* Make sure the image covers the whole page */
+            color: black;/*gunakan warna teks yang kontras*/
+        }
+        
+        h1 {
+            text-align: center;
+            color: Dark Red;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        button { 
+            flex: 1;
+            padding: 10px 15px;
+            background-color: #a20207;
+            color: rgb(249, 243, 243);
+            border: none;
+            border-radius: 1px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 15px;
+            font-style: oblique;
+        }
+        button:hover {
+            background-color: rgb(255, 28, 28);
+            color: dark read;
+            transform: translateY(-2px);
+        }
+
+        .card-container {
+            display: none; /* Awalnya disembunyikan */
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .card {
+            background:white;
+            border-radius: 8px;
+            box-shadow: 10px 10px 5px black;
+            margin: 10px;
+            padding: 20px;
+            flex: 1 1 calc(30% - 20px); /* Ukuran kartu */
+            box-sizing: border-box;
+            transition: transform 0.4s;
+            text-align: center;
+            font-style: italic;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+             border: 2px solid #333;
+        }
+        th {
+            background-color: white;
+            color: black;
+        }
+        #strukturCards img {
+             width: 100%; /* Gambar akan mengisi lebar kontainer */
+                 height: auto; /* Menjaga proporsi gambar */
+                 border-radius: 8px; /* Jika ingin ada sudut melengkung */
+                object-fit: cover; /* Mengontrol cara gambar mengisi kontainer */
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .gallery img {
+            width: calc(33% - 10px);
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        #jadwalPelajaran table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#jadwalPelajaran th {
+    background-color: rgb(199, 13, 13); /* Memberikan latar belakang merah pada header */
+    color: white; /* Teks berwarna putih pada header */
+    padding: 10px;
+    border: 1px solid black;
+}
+
+#jadwalPelajaran td {
+    background-color: white; /* Memberikan latar belakang putih pada kolom lainnya */
+    color: black; /* Teks berwarna hitam untuk kontras */
+    padding: 10px;
+    border: 1px solid black;
+}
+
+    </style>
+    <script>
+        function toggleCards(cardType) {
+            const cardContainers = ['siswaCards', 'guruCards', 'piketCards', 'strukturCards', 'gallery', 'jadwalPelajaran', 'kegiatanKelas'];
+
+            // Sembunyikan semua kartu
+            cardContainers.forEach(id => {
+                const container = document.getElementById(id);
+                if (container) {
+                    container.style.display = id === cardType ? "flex" : "none";
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+
+    <div class="container">
+        
+
+        <div style="display: flex; align-items: center; justify-content: center; text-align: center; gap: 20px;">
+            <!-- Logo Kiri -->
+             <img src="smk.png" alt="Logo kiri" style=" width: 150px; height: auto;">
+
+            <!-- Tulisan -->
+            <div>
+                <h1>Xll TEKNIK KENDARAAN RINGAN</h1>
+                <h1>Welcome to the TKR class website</h1>
+                <h1>Tahun ajaran 2024-2025</h1>
+            </div>
+        
+            <!-- Logo Kanan -->
+           <img src="Logo tkr.png" alt="Logo kanan" style=" width: 250px; height: auto;">
+
+        </div>
+
+        <h1> </h1>
+        <div class="button-container">
+            <button onclick="toggleCards('siswaCards')">Data Siswa</button>
+            <button onclick="toggleCards('guruCards')">Data Guru</button>
+            <button onclick="toggleCards('piketCards')">Piket Kelas</button>
+            <button onclick="toggleCards('strukturCards')">Struktur Kelas</button>
+            <button onclick="toggleCards('gallery')">Galeri Foto</button>
+            <button onclick="toggleCards('jadwalPelajaran')">Jadwal Pelajaran</button>
+            <button onclick="toggleCards('kegiatanKelas')">Kegiatan Kelas</button>
+        </div>
+ 
+        <div id="siswaCards" class="card-container">
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+            
+                 <h3>NABIL AHMADA</h3>
+                <p>NISN:0064520840</p>
+                <p>TTL:TUBAN,20/01/2006</p>
+                <p>ALAMAT:SAWIR</p>
+                <p>KECAMATAN:KEC.TAMBAKBOYO</p>
+                <p>Kelas: Xll - TKR 3</p>
+                </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+           
+                <h3>NANDA ABI TIYANTO</h3>
+                <p>NISN:0078528923</p>
+                <p>TTL:TUBAN,02/05/2007</p>
+                <p>ALAMAT:BRLIKANGET</p>
+                <p>KECAMATAN:KEC.TAMBAKBOYO</p>
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="NIKO.JPG" alt="Foto Abdullah Ali Havid">
+                <h3>NICO AL RASYA ISLAMI PASHA</h3>
+                <p>NISN:0071742829</p>
+                <p>TTL:TULUNGAGUNG,09/04/2007</p>
+                <p>ALAMAT:DUSUN NUNGGUL</p>
+                <p>KECAMATAN:KEC.TAMBAKBOYO</p>
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>NUR KARIM</h3>
+                <p>NISN:0068724436</p>
+                <p>TTL:TUBAN,06/10/2006</p>
+                <p>ALAMAT:MARGOMULYO</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>NUR KHAFID DWI SETIAWAN </h3>
+                <p>NISN:0073408783</p>
+                <p>TTL:TUBAN,05/02/2007</p>
+                <p>ALAMAT:JALAN DUSUN TAJEMAN</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>PRASETYO DEDY IRAWAN</h3>
+                <p>NISN:0062705606</p>
+                <p>TTL:TUBAN,08/11/2006</p>
+                <p>ALAMAT:DAMPUNG</p>
+                <p>KECAMATAN:KEC.TAMBAKBOYO</p>
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>PRIO NUR ABADI</h3>
+                <p>NISN:0067162390</p>
+                <p>TTL:TUBAN,18/09/2006</p>
+                <p>ALAMAT:DSN.TERANGREJO</p>
+                <p>KECAMATAN:KEC.JENU</p>
+               
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>PURNOMO</h3>
+                <p>NISN:0048864297</p>
+                <p>TTL:TUBAN,26/12/2004</p>
+                <p>ALAMAT:JLN DUSUN TARANG REJO</p>
+                <p>KECAMATAN:KEC.JENU</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>PURWANICKO GIGIH ADISELO</h3>
+                <p>NISN:0067599325</p>
+                <p>TTL:TUBAN,02/12/2006</p>
+                <p>ALAMAT:KARANG NDUWUR</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RADIT DHANI SAPUTRA</h3>
+                <p>NISN:0074959143</p>
+                <p>TTL:TUBAN,19/04/2007</p>
+                <p>ALAMAT:DSN SIDODADI DS.GAJI KEC .KEREK</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+               
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RAHAYU</h3>
+                <p>NISN:0065435200</p>
+                <p>TTL:TUBAN,19/07/2006</p>
+                <p>ALAMAT:DUSUN SIDOREJO</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RAHMAT BAGUS MUDZAKIR SHOLEH</h3>
+                <p>NISN:0071677429</p>
+                <p>TTL:TUBAN,17/08/2007</p>
+                <p>ALAMAT:JL NGIMBANG CINGLUNG</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RAMADANI PUTRA</h3>
+                <p>NISN:0066712393</p>
+                <p>TTL:TUBAN,28/09/2006</p>
+                <p>ALAMAT:DESA MLIWANG </p>
+                <p>KECAMATAN:KEC.KEREK</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RENO ADIPUTRA </h3>
+                <p>NISN:0078820416</p>
+                <p>TTL:TUBAN,30/01/2007</p>
+                <p>ALAMAT:SUKOLILO</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="RIKI.JPG" alt="Foto Abdullah Ali Havid">
+                <h3>RIKKY SETIAWAN</h3>
+                <p>NISN:0076692460</p>
+                <p>TTL:TUBAN,18/04/2007</p>
+                <p>ALAMAT:KANOMAN</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RIYAN AGUSTA</h3>
+                <p>NISN:0069131845</p>
+                <p>TTL:TUBAN,01/08/2006</p>
+                <p>ALAMAT:DESA SUKOHARJO</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RIZKY RAMADHANI</h3>
+                <p>NISN::0068454090</p>
+                <p>TTL::TUBAN,27/09/2006</p>
+                <p>ALAMAT:JALAN DESA NGAMPELREJO</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RIZKY SAPUTRA </h3>
+                <p>NISN:0079045222</p>
+                <p>TTL:TUBAN,07/07/2007</p>
+                <p>ALAMAT:DSN .KARANG SARI</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RIZQI EKA ARDIANSYAH</h3>
+                <p>NISN:0079045222</p>
+                <p>TTL:TUBAN,15/05/2007</p>
+                <p>ALAMAT:JALAN DESA NGAMPELREJO</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>ROHMAN</h3>
+                <p>NISN:0068513218</p>
+                <p>TTL:TUBAN,23/03/2006</p>
+                <p>ALAMAT:DESA MLIWANG </p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>RUDIK ALFIANSAH </h3>
+                <p>NISN:0066282438</p>
+                <p>TTL:TUBAN,15/06/2006</p>
+                <p>ALAMAT:MAMPON</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+               
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>SETIADI</h3>
+                <p>NISN:0057716426</p>
+                <p>TTL:TUBAN,02/02/2005</p>
+                <p>ALAMAT:BOGOREJO</p>
+                <p>KECAMATAN:KEC.TAMBAKBOYO</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="AYU.JPG" alt="Foto Abdullah Ali Havid">
+                <h3>SRI AYU ANDARI</h3>
+                <p>NISN:006476791281</p>
+                <p>TTL:TUBAN,06/11/2006</p>
+                <p>ALAMAT:DSN .KANOMAN</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>SYAHRIL NUR OKTAMA</h3>
+                <p>NISN:0069328957</p>
+                <p>TTL:TUBAN,31/10/2006</p>
+                <p>ALAMAT:DESA KARANGREJO</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>TRI SUTRISNO</h3>
+                <p>NISN:0054858337</p>
+                <p>TTL:TUBAN,05/04/2005</p>
+                <p>ALAMAT:DESA TRANTANG</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GINA.jpg" alt="Foto Abdullah Ali Havid">
+                <h3>TSALITSYA REGGINA RAHMADHANI</h3>
+                <p>NISN:0071571658</p>
+                <p>TTL:TUBAN,15/09/2007</p>
+                <p>ALAMAT:BELIKANGET</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>UDIN WAHYU SETYA PUTRA</h3>
+                <p>NISN:0062636240</p>
+                <p>TTL:TUBAN,03/04/2006</p>
+                <p>ALAMAT:DESA SUMERGENEG</p>
+                <p>KECAMATAN:KEC.TAMBAKBOYO</p>
+               
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>WAHYU FADLUR ROHMAN</h3>
+                <p>NISN:0061486169</p>
+                <p>TTL:TUBAN,23/04/2006</p>
+                <p>ALAMAT:JLN DUSUN TARANG REJO</p>
+                <p>KECAMATAN:KEC.JENU</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>WAHYU HERIANTO </h3>
+                <p>NISN:0068692462</p>
+                <p>TTL:TUBAN,11/09/2006</p>
+                <p>ALAMAT:DSN.TERANGREJO</p>
+                <p>KECAMATAN:KEC.TAMBAKBOYO</p>
+               
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>WANDI RIZAL ARDIANSAH</h3>
+                <p>NISN:0069865109<p>
+                <p>TTL:TUBAN,22/01/2006</p>
+                <p>ALAMAT:DAMPUNG</p>
+                <p>KECAMATAN:KEC.JENU</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>WIJAYA GIO PRANATA</h3>
+                <p>NISN:0072690553</p>
+                <p>TTL:TUBAN,06/06/2007</p>
+                <p>ALAMAT:JALAN DUSUN TAJEMAN</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+               
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>WISNU ABIDIN</h3>
+                <p>NISN:0073370280</p>
+                <p>TTL:TUBAN,07/09/2007</p>
+                <p>ALAMAT:MARGOMULYO</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>YOGA ANDREAN PRATAMA</h3>
+                <p>NISN:0065133978</p>
+                <p>TTL:TUBAN,18/09/2006</p>
+                <p>ALAMAT:DUSUN NUNGGUL</p>
+                <p>KECAMATAN:KEC.BANCAR</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>YOGA WIDYASA</h3>
+                <p>NISN:0072507792</p>
+                <p>TTL:TUBAN,28/05/2007</p>
+                <p>ALAMAT:BRLIKANGET</p>
+                <p>KECAMATAN:KEC.KEREK</p>
+                
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+            <div class="card">
+                <img src="GB.png" alt="Foto Abdullah Ali Havid">
+                <h3>ZACHRUL ABIEM</h3>
+                <p>NISN:0074972845</p>
+                <p>TTL:TUBAN,19/01/2007</p>
+                <p>ALAMAT:SAWIR</p>
+                <p>KECAMATAN:KEC.TAMBAKBOYO</p>
+                <p>Kelas: Xll - TKR 3</p>
+            </div>
+          </div>
+
+        <div id="guruCards" class="card-container">
+            <div class="card">
+                <img src="PAKARY.JPG" alt="Foto Ahmad Zainuri">
+                <h3>PAK ARY</h3>
+                <p>ALAMAT:  Mojo, Kec. Gubeng-Surabaya</p>
+                <p>Jabatan: Guru dan Kakonsli Teknik Kendaraan Ringan Otomotif</p>
+            </div>
+            <div class="card">
+                <img src="SHODIKIN.JPG" alt="Foto Ahmad Zainuri">
+                <h3>PAK SODIKIN</h3>
+                <p>TTL: TUBAN,20/08/1992</p>
+                <p>ALAMAT: DUSUN PANGKULANGUN DESA MANDIREJO RT.01 RW.05 KEC.MERAKURAK KAB.TUBAN</p>
+                <p>Jabatan: Guru Produktif Pilihan TKR</p>
+            </div>
+            <div class="card">
+                <img src="PAKHUDA.JPG" alt="Foto Ainun Nisa">
+                <h3>MASHUDA S.PD</h3>
+                <p>TTL: TUBAN, 07/12/1981</p>
+                <p>ALAMAT: DUDUN KRAJAN  KELURAHAN KARANG KEC SEMANDING KAB TUBAN</p>
+                <p>Jabatan: GURU PRODUKTIF</p>
+            </div>
+            <div class="card">
+                <img src="PAKSAIFUL.JPG" alt="Foto Nuranisah">
+                <h3>Pak MUKHAMAD SYAFULLAH S.PD.GR</h3>
+                <p>TTL: TUBAN,02/06/1993</p>
+                <p>ALAMAT: DESA CINGKRUNG RT.003 RW.001 KEC.BANCAR KAB.TUBAN</p>
+                <p>Jabatan: GURU PRODUKTIF</p>
+            </div>
+            <div class="card">
+                <img src="PAKKHUSNUL.JPG" alt="Foto Nuranisah">
+                <h3>Pak CHUSNUL YAKIN</h3>
+                <p>TTL: GOA,13/03/1989</p>
+                <p>ALAMAT: DESA PABELAN KECAMATAN TAMBAKBOYO KAB TUBAN JAWA TIMUR</p>
+                <p>Jabatan: GURU PRODUKTIF</p>
+            </div>
+            <div class="card">
+                <img src="PAKDD.JPG" alt="Foto Nuranisah">
+                <h3>PAK DIDIK ARIANTO</h3>
+                <p>ALAMAT:  Kel. Baturetno Kec.Tuban-Tuban</p>
+                <p>Jabatan: GURU MATEMATIKA</p>
+            </div>
+            <div class="card">
+                <img src="BUMIRA.JPG" alt="Foto Nuranisah">
+                <h3>BU MIRA</h3>
+                <p>TTL: TUBAN,20/08/1992</p>
+                <p>ALAMAT: DUSUN PANGKULANGUN DESA MANDIREJO RT.01 RW.05 KEC.MERAKURAK KAB.TUBAN</p>
+                <p>Jabatan: GURU BHASA INDONESIA</p>
+            </div>
+            <div class="card">
+                <img src="BU BIG.jpg" alt="Foto Nuranisah">
+                <h3>Bu Muhimatul Ifadah</h3>
+                <p>TTL: TUBAN,9/08/1992</p>
+                <p>ALAMAT: DUSUN PULE DESA MANDER</p>
+                <p>Jabatan: GURU BAHASA INGRIS</p>
+            </div>
+            <div class="card">
+                <img src="BUYU.JPG" alt="Foto Nuranisah">
+                <h3>BU YULIA SUCI LUSIANA</h3>
+                <p>TTL: TUBAN,20/08/1992</p>
+                <p>ALAMAT:  Alamat : Tasikharjo, Kec.Jenu</p>
+                <p>Jabatan: Guru BK</p>
+            </div>
+            <div class="card">
+                <img src="BUWAHYU.JPG" alt="Foto Nuranisah">
+                <h3>BU SITI WAHYUNINGSIH </h3>
+                <p>TTL: TUBAN,20/08/1992</p>
+                <p>ALAMAT: DUSUN PANGKULANGUN DESA MANDIREJO RT.01 RW.05 KEC.MERAKURAK KAB.TUBAN</p>
+                <p>Jabatan: Guru PPKN</p>
+            </div>
+            <div class="card">
+                <img src="PAK RASMU1.jpg" alt="Foto Nuranisah">
+                <h3>Pak RASMU </h3>
+                <p>TTL: TUBAN,20/08/1992</p>
+                <p>ALAMAT: Alamat : Ds. Temayang, Kec. Kerek,Kab.Tuban/p>
+                <p>Jabatan: Guru PAI</p>
+            </div>
+            <div class="card">
+                <img src="BUTIKA.JPG" alt="Foto Nuranisah">
+                <h3>BU TIKA </h3>
+                <p>TTL: TUBAN,20/08/1992</p>
+                <p>ALAMAT:Kayen, Kec. Banca</p>
+                <p>Jabatan: GURU BAHASA JAWA</p>
+            </div>
+        </div>
+
+        <div id="piketCards" class="card-container">
+            <div class="card">
+                <h3>Senin</h3>
+                <p> NABIL AHMADA</p>
+                <p> NANDA ABI TIYANTO</p>
+                <p> NICO AL RASYA ISLAMI PASHA</p>
+                <p> NUR KARIM</p>
+                <p> NUR KHAFID DWI SETIAWAN</p>
+                <p> YOGA WIDYASA</p>
+                <p> ZACHRUL ABIEM</p>
+            </div>
+            <div class="card">
+                <h3>Selasa</h3>
+                <p> PRASETYA DEDY IRAWAN</p>
+                <p> PRIO NUR ABADI</p>
+                <p> PURNOMO</p>
+                <p> PURWANICKO GIGIH ADISELO</p>
+                <p> RADIT DHANI SAPUTRA</p>
+                <p> WISNU ABIDIN</p>
+                <p> YOGA ANDREAN PRATAMA</p>
+            </div>
+            <div class="card">
+                <h3>Rabu</h3>
+                <p> RAHAYU</p>
+                <p> RAHMAT BAGUS MUDZAKIR SHOLEH</p>
+                <p> RAMADANI PUTRA</p>
+                <p> RENO ADIPUTRA </p>
+                <p> RIKKY SETIAWAN</p>
+                <p> WANDI RIZAL ARDIANSAH</p>
+                <p> WIJAYA GIO PRANATA</p>
+            </div>
+            <div class="card">
+                <h3>Kamis</h3>
+                <p> RIYAN AGUSTA</p>
+                <p> RIZKY RAMADHANI</p>
+                <p> RIZKY SAPUTRA </p>
+                <p> RIZQI EKA ARDIANSYAH</p>
+                <p> ROHMAN</p>
+                <p> RUDIK ALFIANSAH </p>
+                <p> SETIADI</p>
+           </div>
+           <div class="card">
+                <h3>Jumat</h3>
+                <p> SRI AYU ANDARI</p>
+                <p> SYAHRIL NUR OKTAMA</p>
+                <p> TRI SUTRISNO</p>
+                <p> TSALITSYA REGGINA RAHMADHANI</p>
+                <p> UDIN WAHYU SETYA PUTRA</p>
+                <p> WAHYU FADLUR ROHMAN</p>
+                <p> WAHYU HERIANTO </p>
+           </div>
+        </div>
+
+        <div id="strukturCards" class="card-container">
+            <img src="ST.jpg" >
+         </div>
+
+        <div id="gallery" class="gallery">
+            <img src="KG1.jpg" alt="Foto Kegiatan 1">
+            <img src="ST.jpg" alt="Foto Kegiatan 2">
+            <img src="KG2.jpg" alt="Foto Kegiatan 3">
+        </div>
+
+        <div id="jadwalPelajaran" class="card-container">
+    <table>
+        <tr>
+            <th>Hari</th>
+            <th>Pelajaran</th>
+            <th>waktu</th>
+        </tr>
+        <tr>
+            <td rowspan="4">Senin</td>
+            <td>B6-TKR</td>
+            <td>07:40-10:40</td>
+        </tr>
+        <tr>
+            <td>A2</td>
+             <td>10:40-12:00</td>
+        </tr>
+        <tr>
+            <td>B2</td>
+             <td>12:20-13:50</td>
+        </tr>
+        <tr>
+            <td>A7</td>
+             <td>13:50-15:10</td>
+        </tr>
+
+        <tr>
+            <td rowspan="4">Selasa</td>
+            <td>B2</td>
+             <td>07:00-08:20</td>
+        </tr>
+        <tr>
+            <td>A3</td>
+             <td>08:20-10:40</td>
+        </tr>
+        <tr>
+            <td>B6-TKR</td>
+             <td>10:40-13:10</td>
+        </tr>
+         <tr>
+            <td>B6-TKR</td>
+             <td>13:10-15:10</td>
+        </tr>
+
+        <tr>
+            <td rowspan="4">Rabu</td>
+            <td>B6-TKR</td>
+             <td>07:00-09:40</td>
+        </tr>
+        <tr>
+            <td>BK</td>
+             <td>10:00-10:40</td>
+        </tr>
+        <tr>
+            <td>B1</td>
+             <td>10:40-13:10</td>
+        </tr>
+        <tr>
+            <td>A1</td>
+             <td>13:10-15:10</td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">Kamis</td>
+            <td>B6-TKR</td>
+             <td>07:00-13:10</td>
+        </tr>
+        <tr>
+         <td>B7-TKR</td>
+          <td>13:10-15:10</td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">Jumat</td>
+            <td>B7-TKR</td>
+             <td>08:20-11:20</td>
+        </tr>
+        <tr>
+            <td>B8A-TKR</td>
+             <td>07:00-08:20</td>
+           </tr>
+
+    </table>
+ </div>
+
+  <div id="kegiatanKelas" class="card-container">
+        <h3> KEGIATAN KELAS</h3>
+        <Ol>
+            <li>KELAS Xll TKR 3 SEDANG MELAKUKAN PKL</li>
+        </Ol>
+    </div>
+</div>
+    
+</body>
+</html>
